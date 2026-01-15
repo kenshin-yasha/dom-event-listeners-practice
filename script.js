@@ -2,23 +2,20 @@
 const cardContainer = document.querySelector(".card-container");
 
 cardContainer.addEventListener("click", (event) => {
+
+    /* Delete button handling */
+    const deleteBtn = event.target.closest(".delete-btn");
+    if (deleteBtn) {
+        const card = deleteBtn.closest(".card");
+        card.remove();
+        return;
+    }
+
+    // Card activation handling
     const card = event.target.closest(".card");
+    if (!card) return;
 
-    if(!card) return;
-
-    const cards = document.querySelectorAll(".card");
-    cards.forEach((c) => c.classList.remove("active"));
+    document.querySelectorAll(".card").forEach(c => c.classList.remove("active"));
 
     card.classList.add("active");
-});
-
-/* script for delete buttons */
-const deleteButtons = document.querySelectorAll(".delete-btn");
-
-deleteButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
-        event.stopPropagation();
-        const card = button.closest(".card");
-        card.remove();
-    });
 });
